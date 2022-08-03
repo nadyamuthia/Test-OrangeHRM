@@ -1,1 +1,36 @@
+import unittest
+import time
+#from urllib import response
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+class TestAdmin(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+       
+    def test_search_employee_by_username(self):
+        #step
+        driver = self.driver #open web browser
+        driver.get("https://opensource-demo.orangehrmlive.com/") #buka web browser
+        time.sleep(10)
+        driver.find_element(By.NAME, "txtUsername").send_keys("Admin") #insert username
+        time.sleep(2)
+        driver.find_element(By.NAME, "txtPassword").send_keys("admin123") #insert password
+        time.sleep(2)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[3]/div[2]/div[2]/form/div[5]/input").click() #klik tombol login
+        time.sleep(5)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/ul/li[11]/a").click() #klik tombol BUZZ
+        time.sleep(5)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div[3]/div/div[6]/div[2]/div[1]/div[1]/form/fieldset/ol/li[1]/textarea").send_keys("GOOD DAY!") #insert POST
+        time.sleep(2)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div[3]/div/div[6]/div[2]/div[1]/div[1]/p/input").click() #POST
+
+
+
+    def tearDown(self):
+        self.driver.close() #menutup browser
+if __name__ == "__main__":
+    unittest.main()
+
 
