@@ -1,1 +1,44 @@
+import unittest
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+class TestAdmin(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+       
+    def test_add_emergency_contact_myinfo(self):
+        #step
+        driver = self.driver #open web browser
+        driver.get("https://opensource-demo.orangehrmlive.com/") #buka web browser
+        time.sleep(10)
+        driver.find_element(By.NAME, "txtUsername").send_keys("Admin") #insert username
+        time.sleep(2)
+        driver.find_element(By.NAME, "txtPassword").send_keys("admin123") #insert password
+        time.sleep(2)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[3]/div[2]/div[2]/form/div[5]/input").click() #klik tombol login
+        time.sleep(5)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/ul/li[6]/a").click() #klik tombol my info
+        time.sleep(5)
+        driver.find_element(By.XPATH, "/html/body/div[1]/div[3]/div/div[1]/ul/li[3]/a").click() #klik emergency contact
+        time.sleep(2)
+        driver.find_element(By.ID, "btnAddContact").click() #tombol add
+        time.sleep(2)
+        driver.find_element(By.NAME, "emgcontacts[name]").send_keys("Kylie") #insert name
+        time.sleep(2)
+        driver.find_element(By.NAME, "emgcontacts[relationship]").send_keys("Mother") #insert relationship
+        time.sleep(2)
+        driver.find_element(By.NAME, "emgcontacts[mobilePhone]").send_keys("088899997654") #insert phone number
+        time.sleep(2)
+        driver.find_element(By.NAME, "btnSaveEContact").click() #insert phone number
+        time.sleep(2)
+
+
+
+    def tearDown(self):
+        self.driver.close() #menutup browser
+if __name__ == "__main__":
+    unittest.main()
+
 
